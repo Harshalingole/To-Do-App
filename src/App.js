@@ -3,7 +3,7 @@ import CardTaskList from "./Component/Card/Task_List/task_list.cmpt";
 import { useState } from "react";
 
 function App() {
-  console.log("AppRender");
+  // console.log("AppRender");
   const [taskList, setTaskList] = useState([]);
   const [newTsList, setNewTsList] = useState([]);
   const [inputVal, setInputVal] = useState("");
@@ -23,7 +23,7 @@ function App() {
   //   totalTaskCount();
   // }, [smryDt]);
   const totalTaskCount = () => {
-    console.log("totalTaskCount");
+    // console.log("totalTaskCount");
     const totalTask = newTsList.length;
     smryDt.total = totalTask;
     smryDt.remaining = smryDt.total - smryDt.done;
@@ -31,19 +31,21 @@ function App() {
   };
   const getInputVal = (e) => {
     const inputString = e.target.value;
-    console.log(inputString);
+    // console.log(inputString);
     setInputVal(inputString);
   };
   const addToList = () => {
-    console.log(`addToList btn click`);
-    const obj = { title: inputVal, isMark: false };
+    // console.log(`addToList btn click`);
+    //inputVal.trim().length > 1 return
+    if (!(inputVal.trim().length >= 1)) return;
+    const obj = { title: inputVal.trim(), isMark: false };
     taskList.push(obj);
     setNewTsList(taskList);
     setInputVal("");
     totalTaskCount();
   };
   const deleteTask = (e) => {
-    console.log("delete btn click");
+    // console.log("delete btn click");
     e.stopPropagation();
     setPrevId(Number(e.target.id));
     const curId = Number(e.target.id);
@@ -59,23 +61,23 @@ function App() {
     setTaskList(taskList);
     setNewTsList(taskList);
     totalTaskCount();
-    console.log("totaltskcnt");
+    // console.log("totaltskcnt");
   };
   const markDone = (e) => {
-    console.log("mark btn click");
+    // console.log("mark btn click");
     const curId = Number(e.target.id);
-    console.log(curId);
+    // console.log(curId);
     // console.log(taskList[curId]["isMark"]);
     taskList[curId]["isMark"] = !taskList[curId]["isMark"];
     smryDt.isMark = taskList[curId]["isMark"];
     // console.log(smryDt.isMark);
     // Increment In Done
     smryDt.isMark ? smryDt.done++ : smryDt.done--;
-    console.log(smryDt.readOnlyState, "1");
+    // console.log(smryDt.readOnlyState, "1");
     smryDt.readOnlyState
       ? (smryDt.readOnlyState = false)
       : (smryDt.readOnlyState = true);
-    console.log(smryDt.readOnlyState, "1");
+    // console.log(smryDt.readOnlyState, "1");
 
     inputVal === "" ? setInputVal(" ") : setInputVal("");
     totalTaskCount();
@@ -86,7 +88,7 @@ function App() {
     const curId = Number(e.target.id);
     // smryDt.isMark = taskList[curId]["isMark"];
     if (taskList[curId]["isMark"]) return;
-    console.log("edt btn click");
+    // console.log("edt btn click");
     if (!(prevId === curId)) {
       smryDt.edtbtnCount = 0;
       prevId === null
@@ -101,19 +103,19 @@ function App() {
       e.target.removeAttribute("readOnly");
       smryDt.edtbtnCount++;
       setSmryDt(smryDt);
-      console.log("readOnlyState");
+      // console.log("readOnlyState");
     }
     setSmryDt(smryDt);
   };
   const editTaskChange = (e) => {
     if (taskList[e.target.id]["isMark"]) return;
-    console.log("editTaskChange");
-    console.log(smryDt.edtbtnCount);
+    // console.log("editTaskChange");
+    // console.log(smryDt.edtbtnCount);
     const editString = e.target.value;
     console.log(inptEdtStr);
     setInptEdtStr(editString);
     const index = Number(e.target.id);
-    console.log(taskList[index]["title"]);
+    // console.log(taskList[index]["title"]);
     taskList[index]["title"] = editString;
   };
 
@@ -127,7 +129,7 @@ function App() {
   // );
   return (
     <div className="body bg-[#D2E3ED] h-[100vh] flex justify-center items-center w-[100%]">
-      <div className="main flex flex-col text-center w-[100%] md:w-[60%] lg:w-[45%] xl:w-[30%] rounded-3xl border-2 border-cyan-300 p-0  bg-[#2B5181]">
+      <div className="main flex flex-col text-center w-[100%] md:w-[60%] lg:w-[45%] xl:w-[30%] rounded-3xl border-2  p-0  bg-[#2B5181] shadow-2xl  shadow-slate-500">
         <CardTaskList
           taskList={newTsList}
           sumaryData={smryDt}
