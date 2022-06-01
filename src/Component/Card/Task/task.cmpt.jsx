@@ -1,7 +1,5 @@
 function CardTask(props) {
-  const { taskList, deleteTask, taskDone, sumaryData, editTask, editOnChange } =
-    props;
-  const { markInd, isMark, readOnlyState } = sumaryData;
+  const { taskList, deleteTask, taskDone, editTask, editOnChange } = props;
   return (
     <>
       {/* Map over TaskList Array TO show  Container */}

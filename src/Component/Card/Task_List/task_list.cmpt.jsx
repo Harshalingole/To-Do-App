@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import DateSumry from "../../DateSumry/dateSumry.cmpt";
 import CardTask from "../Task/task.cmpt";
 

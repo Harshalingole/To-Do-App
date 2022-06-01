@@ -1,6 +1,6 @@
 import "./App.css";
 import CardTaskList from "./Component/Card/Task_List/task_list.cmpt";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 function App() {
   console.log("AppRender");
@@ -18,10 +18,10 @@ function App() {
     markInd: "",
     isMark: false,
   });
-  useEffect(() => {
-    console.log("useEffect: smrtDt");
-    totalTaskCount();
-  }, [smryDt]);
+  // useEffect(() => {
+  //   console.log("useEffect: smrtDt");
+  //   totalTaskCount();
+  // }, [smryDt]);
   const totalTaskCount = () => {
     console.log("totalTaskCount");
     const totalTask = newTsList.length;
@@ -56,6 +56,7 @@ function App() {
     const taskIndex = Number(e.target.id);
     const num = 1;
     taskList.splice(taskIndex, num);
+    setTaskList(taskList);
     setNewTsList(taskList);
     totalTaskCount();
     console.log("totaltskcnt");
@@ -109,6 +110,7 @@ function App() {
     console.log("editTaskChange");
     console.log(smryDt.edtbtnCount);
     const editString = e.target.value;
+    console.log(inptEdtStr);
     setInptEdtStr(editString);
     const index = Number(e.target.id);
     console.log(taskList[index]["title"]);
